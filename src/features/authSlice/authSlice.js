@@ -4,8 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 const initialState = {
     username: "",
-    iisuseradmin: false,
+    isuseradmin: false,
     loginstatus: false, 
+    usercreated: false,
     token: "",
     data: {},                                                                                                             
 }
@@ -23,6 +24,9 @@ export const authSlice = createSlice({
         },
         id: (state,action)=>{
             state.username = action.payload;
+        },
+        createUser: (state)=>{
+            state.usercreated = true;
         }
     }
 })
@@ -30,7 +34,7 @@ export const authSlice = createSlice({
 export const userLogin = (userdata) => (dispatch) =>{
     axios({
         method: "POST",
-        url: "https://mashami.cyclic.app/api/auth/login",
+        url: "https://tresor.onrender.com/api/auth/login",
         data: userdata,
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -54,12 +58,13 @@ export const userLogin = (userdata) => (dispatch) =>{
 export const userRegister = (userdata) => (dispatch) => {
     axios({
         method: "POST",
-        url: "https://mashami.cyclic.app/api/auth/register",
+        url: "https://tresor.onrender.com/api/auth/register",
         data: userdata,
     }).then((feedback)=>{
         console.log(feedback);
+        dispatch(createUser())
     })
 }
 
-export const {login,token,id} = authSlice.actions;
+export const {login,token,id,createUser} = authSlice.actions;
 export default authSlice.reducer;

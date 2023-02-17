@@ -7,17 +7,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../features/authSlice/authSlice';
 import { userRegister } from '../features/authSlice/authSlice';
 import { useNavigate } from 'react-router-dom';
+import {TiTick} from 'react-icons/ti';
 
 export const Popup = () => {
     const loginstatus = useSelector((state)=>state.authorizer.loginstatus);
     const userName = useSelector((state)=>state.authorizer.username)
+    const {usercreated} = useSelector((state)=>state.authorizer)
     const [username,setUsername] = useState("");
     const [usermail,setEmail] = useState("");
     const [userpassword,setPassword] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(()=>{
-        if (loginstatus && (userName === "migabo")) {
+        if (loginstatus) {
             navigate("/dashboard")
         }
     },[loginstatus])
@@ -30,12 +32,13 @@ export const Popup = () => {
                     <RxCross1/>
                 </div>
                 <div id='logintitle'>Log In</div>
-                <div id='newbie'>Don't have an account? <span onClick={()=>{
+                <div id='newbie'>Don't have an account?
+                 <span  onClick={()=>{
                     document.getElementById("login-popup").style.display = "none";
                     document.getElementById("create-account-popup").style.display = "flex";
-                }}>Create Your Account,</span> It takes less than a minute.</div>
+                }}> Create Your Account,</span> It takes less than a minute.</div>
                 <form id='popup-login-form' className='popup-form'>
-                    <label>Email (use: agent)</label>
+                    <label>Username (use: agent)</label>
                     <input type={"text"} id='popup-username' onChange={(event)=>{
                         setEmail(event.target.value);
                     }} />
@@ -47,7 +50,7 @@ export const Popup = () => {
                     <button className='popup-buttons' id='loginbutton' onClick={(e)=>{
                         e.preventDefault();
                         dispatch(userLogin({
-                            email: usermail,
+                            username: usermail,
                             password: userpassword,
                         }))
                     }} >LOGIN</button>
@@ -64,7 +67,8 @@ export const Popup = () => {
                     document.getElementById("login-popup").style.display = "none";
                     document.getElementById("forgot-password-popup").style.display = "flex";
                 }}>
-                    Lost Your Password?
+                    
+                    forgot Password?
                 </div>
             </div>
             <div id='create-account-popup'>
@@ -117,11 +121,16 @@ export const Popup = () => {
                     </div>
                     <button id='create-account' className='popup-buttons' onClick={(event)=>{
                         event.preventDefault();
-                        dispatch(userRegister({
-                            username: username,
-                            email: usermail,
-                            password: userpassword,
-                        }))
+                        if (!usercreated) {
+                            dispatch(userRegister({
+                                username: username,
+                                email: usermail,
+                                password: userpassword,
+                            }));
+                            document.getElementById("create-account-popup").style.display = "none";
+                            document.getElementById("successful-login").style.display = "flex";
+                            document.getElementById("account-creation-login").innerHTML = "Created Account";
+                        }
                     }} >Create Account</button>
                 </form>
             </div>
@@ -136,8 +145,20 @@ export const Popup = () => {
                 <form id='forgot-password-form' className='popup-form'>
                     <label>Username or Email</label>
                     <input type={"text"} id='popup-credential' />
-                    <button className='popup-buttons' id='new-password'>GET NEW PASSWORD</button>
+                    <button className='popup-buttons' id='new-password'>
+                        RESET  PASSWORD</button>
                 </form>
+            </div>
+            <div id='successful-login'>
+                <div id='tick'>
+                    <TiTick/>
+                </div>
+                <p>You Have Successfully<br/> <span id="account-creation-login">Logged In</span></p>
+                <button id='ok-button' onClick={()=>{
+                    document.getElementById("successful-login").style.display = "none";
+                    document.getElementById("login-popup").style.display  = "flex";
+                    document.getElementById("background").style.display = "none";
+                }}>ok</button>
             </div>
         </div>
     )

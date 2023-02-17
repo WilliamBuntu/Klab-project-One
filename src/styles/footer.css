@@ -2,11 +2,12 @@ footer{
     position: fixed;
     width: 100%;
     bottom: 0;
-    background-color: #EFEFEF;
+    background-color: #8b8888;
     font-size: 13px;
     padding: 20px 0px;
     font-weight: 300;
     bottom: 0;
+    height: 20px;
 }
 .footerLinks{
     margin-left: 30px;

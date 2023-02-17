@@ -9,7 +9,7 @@ import { RxCross1 } from "react-icons/rx";
 export const ChatSection = () => {
     return (
         <div className="arrow-chat-section">
-            <div className="arrow-section">
+            {/* <div className="arrow-section">
                 <div className="arrow" id="back-arrow">
                     <IoIosArrowBack/>
                 </div>
@@ -48,7 +48,7 @@ export const ChatSection = () => {
                 document.getElementById("chat-hider").style.display = "flex";
             }}>
                 <RiMessage2Fill/>
-            </div>
+            </div> */}
         </div>
     )
 }

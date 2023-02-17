@@ -28,3 +28,9 @@ header #account-icon{
     margin-top: 30px;
     cursor: pointer;
 }
+
+li{
+    font-size: medium;
+    font-weight: 200;
+
+}
