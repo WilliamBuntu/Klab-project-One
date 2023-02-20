@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import '../styles/dashboard.css';
 import {FiSearch} from 'react-icons/fi';
 import {RxCross2} from 'react-icons/rx';
@@ -16,6 +16,7 @@ import {FaUsers} from 'react-icons/fa'
 import {Dashboard_1} from '../pages/dashboard_1'
 import {AiFillFileAdd} from 'react-icons/ai'
 import {FaThList} from 'react-icons/fa'
+import { Navigate } from "react-router-dom";
 import { Dashboard_2 } from "./dashboard_2";
 
 // import {ChartComponent} from'./pages/chart'
@@ -26,6 +27,18 @@ export const Dashboard = ()=>{
     useEffect(()=>{
         navigate("/dashboard/news")
     },[])
+
+
+    const [isClicked, setIsClicked] = useState(false);
+
+    const handleClick = () => {
+      // Perform login logic here, for example using API calls
+      setIsClicked(true);
+    };
+  
+    if (isClicked) {
+      return <Navigate to="/dashboard/addBlogs" />;
+    }
     return (
         <div id="dashboard">
             <div id="dashboard-top-navigation">
@@ -70,7 +83,7 @@ export const Dashboard = ()=>{
                         <div id="add-sign">
                             <AiOutlinePlus/>
                         </div>
-                        <div>Add More Listings</div>
+                        <div  onClick={handleClick}>Add More Listings</div>
                     </div>
                 </div>
             </div>
@@ -106,7 +119,7 @@ export const Dashboard = ()=>{
             </div>
 
             </div>
-            <div  style={{height:"250vh",width:"90%",marginLeft:"25%" , background:' #F5F7FB' , paddingTop:50 , }}>
+            <div  style={{marginLeft:"25%" , background:' #F5F7FB' , paddingTop:40 , }}>
             <Outlet/>
             </div>
         </div>

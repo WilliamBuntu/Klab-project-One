@@ -56,7 +56,7 @@ const navigate = useNavigate()
     })
       .then((result) => {
         console.log(result);
-        navigate("/dashboard/myListings")
+        navigate("/dashboard/Dashboard_2")
       }).catch((err)=>{
         console.log(err)
 

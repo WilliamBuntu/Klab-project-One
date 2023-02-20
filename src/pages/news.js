@@ -15,7 +15,7 @@ export const News = () => {
     const getData = () => {
         axios({
             method: "GET",
-            url: "https://newsapi.org/v2/everything?q=tesla&from=2023-01-17&sortBy=publishedAt&apiKey=2b09b9e55cd148a7bd832a47195f9f4b"
+            url: "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=2b09b9e55cd148a7bd832a47195f9f4b"
         }).then((outcome) => {
             setNews(outcome.data.articles);
         }).catch((error) => {console.log(error);

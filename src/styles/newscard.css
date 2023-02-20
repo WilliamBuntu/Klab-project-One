@@ -1,8 +1,10 @@
 .newsCard{
     width: 49%;
-    height: 670px;
+    height: 650px;
     border: 1px solid rgba(128, 128, 128, 0.438);
-    margin-top: 40px;
+    margin-top: 20px;
+    border-radius: 5px;
+    background: white;
 }
 .cardImage{
     height: 350px;

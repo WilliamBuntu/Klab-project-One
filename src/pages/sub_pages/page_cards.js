@@ -8,7 +8,11 @@ import { GiNetworkBars } from "react-icons/gi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { AiFillStar } from "react-icons/ai";
 import './page_1.css'
-   const ListingCards = ({ image, paragraph, address, views }) => {
+import { useDispatch } from "react-redux";
+import { Delete } from "../../features/delete/deleteSlice";
+
+   const ListingCards = ({ image, paragraph, address, views,id }) => {
+    const dispatch = useDispatch();
   return (
     <>
       <div className="listingCardParent">
@@ -58,7 +62,9 @@ import './page_1.css'
               <GiNetworkBars style={{ color: "#487ffc" }} />
             </div>
             <div className="listingCardButton">
-              <RiDeleteBinLine style={{ color: "#487ffc" }} />{" "}
+              <RiDeleteBinLine style={{ color: "#487ffc" }} onClick={()=>{
+                dispatch(Delete(id))
+              }}/>{console.log(id)}
             </div>
           </div>
         </div>
